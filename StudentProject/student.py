@@ -2,8 +2,8 @@ import pymysql
 import traceback
 
 
-class People:
-    '''创建一个people类'''
+class Student:
+    '''创建一个学生类'''
 
     def __init__(self, n, a, s):
         self.name, self.age, self.score = n, a, s
@@ -26,20 +26,20 @@ class People:
         return self.age
 
     @classmethod
-    def input_People(cls):
+    def input_student(cls):
         L = []
         while True:
-            n = input('输入人员姓名')
+            n = input('输入学生姓名')
             if not n:
                 break
-            a = input('输入人员年龄')
-            s = input('输入人员成绩')
-            stu = People(n, a, s)
+            a = input('输入学生年龄')
+            s = input('输入学生成绩')
+            stu = Student(n, a, s)
             L.append(stu)
         return L
 
     @classmethod
-    def output_People(cls, lst):
+    def output_student(cls, lst):
         print('+'+15*'-'+'+'+15*'-'+'+'+15*'-'+'+')
         print('|'+'name'.center(15)+'|'+'age'.center(15)
               + '|'+'score'.center(15)+'|')
@@ -50,13 +50,13 @@ class People:
         print('+'+15*'-'+'+'+15*'-'+'+'+15*'-'+'+')
 
     @classmethod
-    def alter_People(cls, lst):
+    def alter_stdent(cls, lst):
         l = []
         while True:
-            in_name = input('输入要修改的人员姓名')
+            in_name = input('输入要修改的学生姓名')
             if not in_name:
                 break
-            in_score = input('输入要修改的人员成绩')
+            in_score = input('输入要修改的学生成绩')
             for i in lst:
                 if i.name == in_name:
                     i.score = in_score
@@ -66,10 +66,10 @@ class People:
         return l
 
     @classmethod
-    def del_People(cls, lst):
+    def del_student(cls, lst):
         l = []
         while True:
-            in_name = input('输入要删除的人员名字')
+            in_name = input('输入要删除的学生名字')
             if not in_name:
                 break
             for i in lst:
@@ -105,7 +105,7 @@ class People:
                     n, a, s = name_age_score
                     a = int(a)
                     s = int(s)
-                    L.append(People(n, a, s))
+                    L.append(Student(n, a, s))
         except:
             print('读文件失败！')
             traceback.print_exc()
@@ -139,7 +139,7 @@ class People:
                     n, a, s = name_age_score
                     a = int(a)
                     s = int(s)
-                    L.append(People(n, a, s))
+                    L.append(Student(n, a, s))
         except:
             print('发生异常')
             traceback.print_exc()

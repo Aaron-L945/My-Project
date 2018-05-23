@@ -1,5 +1,5 @@
 from menu import show_menu
-import people_infos as si
+import student_infos as si
 
 
 def main():
@@ -7,13 +7,13 @@ def main():
         show_menu()
         s = input('请选择')
         if s == '1':
-            si.add_people_info()
+            si.add_student_info()
         elif s == '2':
-            si.show_people_info()
+            si.show_student_info()
         elif s == '3':
-            si.modify_people_score()
+            si.modify_student_score()
         elif s == '4':
-            si.del_people_info()
+            si.del_student_info()
         elif s == '5':
             si.order_by_score_desc()
         elif s == '6':
