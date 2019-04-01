@@ -117,6 +117,7 @@ def seat_number(num):
         L.append(seat_num)
     return L
 
+
 def do_checkseat(c,db,msg):
     sql = "select seat from movie where m_name = %s;"
     cursor = db.cursor()
@@ -125,21 +126,9 @@ def do_checkseat(c,db,msg):
     print(movie_seat)
     now_seat = movie_seat[0]
     return now_seat
-# def Cinema Information(c,db):
-#     sql = "select * from Cinema_info;"
-#     cursor = db.cursor()
-#     cursor.execute(sql)
-#     Cinema_tb = cursor.fetchall()
-#     return Cinema_tb
+
 
 def do_tickets(c,db):
-    # Cinema_tb = Cinema Information(c,db)
-    # if Cinema_tb:
-    #     for Cinema_ifno in Cinema_tb:
-    #         c_id = Cinema_ifno[0]
-    #         c_name = Cinema_ifno[1]
-    #         data = '序号:{}电影院:{}\n'.format(c_id,c_name)
-    #         c.send(data.encode(()))
     sql = "select * from movie;"
     cursor = db.cursor()
     cursor.execute(sql)
