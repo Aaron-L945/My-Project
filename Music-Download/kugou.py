@@ -10,10 +10,15 @@ import sys
 
 mname = ''
 
+def my_webdriver():
+    option = webdriver.ChromeOptions()
+    option.binary_location = r'C:\Users\lxy\chrome\Google Chrome\chrome.exe'
+    driver = webdriver.Chrome(r"C:\Users\lxy\chrome\Google Chrome\chromedriver.exe")
+    return driver
 
 #获取音乐的URL
 def get_url(url,key):
-    driver = webdriver.Chrome()
+    driver = my_webdriver()
     driver.get(url)
     driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[1]/div[1]/input').send_keys(key)
     driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[1]/div[1]/div/i').click()
@@ -24,17 +29,21 @@ def get_url(url,key):
 
 
 def show_results(url):
-    driver = webdriver.Chrome()
+    driver = my_webdriver()
     driver.get(url)
     for i in range(1,1000):  #假设有一千首歌歌曲
         try:
-            print('%s'%i+driver.find_element_by_xpath('//*[@id="search_song"]/div[2]/ul[2]/li[%s]/div[1]/a'%i).get_attribute('title'))
+            print('%s '%i+driver.find_element_by_xpath('//*[@id="search_song"]/div[2]/ul[2]/li[%s]/div[1]/a'%i).get_attribute('title'))
         except NoSuchElementException as e:
-            print('not found')
+            print('Bottom!!')
             break
-    choice = input('请选择 刷新或退出 ')
-    if choice == '退出':
+    choice = input('input the number of song OR quit OR reselect ')
+    # import pdb
+    # pdb.set_trace()
+    if choice == 'quit':
         result = 'quit'
+    elif choice == "reselect":
+        result = "reselect"
     else:
         global mname
         mname = driver.find_element_by_xpath('//*[@id="search_song"]/div[2]/ul[2]/li[%s]/div[1]/a'%choice).get_attribute('title')
@@ -49,6 +58,7 @@ def show_results(url):
         result = driver.find_element_by_xpath('//*[@id="myAudio"]').get_attribute('src')
         driver.close()
         driver.quit()
+    print(result)
     return result
 
 
@@ -57,14 +67,19 @@ def cbk(a,b,c):
     per = 100.0*a*b/c
     if per>100:
         per=100
-    print('%.2f%%'%per,end=' ')
+    print('%.2f%%'%per,end='\r')
         
             
 def choice(url):
-    while True:            
+
+    while True:
         result = show_results(url)
         if result=='quit':
             sys.exit(0)
+        elif result == "reselect":
+            return
+        elif result.find("mp3") == -1:
+            print("the song don't download！")
         else:
             local = 'music\%s.mp3'%mname
             print('download start')
