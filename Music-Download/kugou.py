@@ -12,8 +12,8 @@ mname = ''
 
 def my_webdriver():
     option = webdriver.ChromeOptions()
-    option.binary_location = r'C:\Users\lxy\chrome\Google Chrome\chrome.exe'
-    driver = webdriver.Chrome(r"C:\Users\lxy\chrome\Google Chrome\chromedriver.exe")
+    option.binary_location = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
+    driver = webdriver.Chrome(r"C:\Program Files\chrome\chromedriver.exe")
     return driver
 
 
